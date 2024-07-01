@@ -1,0 +1,35 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/public/styles.css">
+  <title>Task Manager</title>
+</head>
+<body>
+  <div id="app">
+    <h1>Task Manager</h1>
+    <div id="task-form">
+      <input type="text" id="task-input" placeholder="Add a new task...">
+      <select id="priority-select">
+        <option value="1">Low Priority</option>
+        <option value="2">Medium Priority</option>
+        <option value="3">High Priority</option>
+      </select>
+      <button onclick="addTask()">Add Task</button>
+    </div>
+    <ul id="task-list">
+      <% tasks.forEach(task => { %>
+        <li>
+          <%= task.name %> - Priority: <%- task.priority %> (<%= task.completed ? 'Completed' : 'Pending' %>)
+          <button onclick="deleteTask('<%- task.id %>')">Delete</button>
+          <button onclick="markTaskAsCompleted('<%- task.id %>')">Mark as Completed</button>
+        </li>
+      <% }); %>
+    </ul>
+  </div>
+
+  <script src="/public/script.js"></script>
+</body>
+</html>
